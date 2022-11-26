@@ -62,7 +62,6 @@ routes.get('/pet', asyncHandler(PetController.index));
 routes.post('/pet', asyncHandler(PetController.store));
 routes.get('/pet/:pet_id', asyncHandler(PetController.find));
 routes.delete('/pet/:pet_id', asyncHandler(PetController.destroy));
-routes.put('/pet/:pet_id', asyncHandler(PetController.update));
 
 // status
 routes.get('/status', asyncHandler(StatusController.index));

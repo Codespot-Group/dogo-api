@@ -11,7 +11,9 @@ class PetController {
       image: Yup.object().shape({
         data: Yup.string().notRequired(),
       }),
-      breed_id: Yup.number().notRequired(),
+      breed: Yup.object().shape({
+        data: Yup.string().notRequired(),
+      }),
       user: Yup.object().shape({
         data: Yup.string().notRequired(),
       }),
@@ -23,14 +25,14 @@ class PetController {
       return res.status(400).json({ message: e.errors[0] });
     }
 
-    const { name, image, breed_id, user_id } = req.body;
+    const { name, image, breed, user_id } = req.body;
 
     var includes = [];
 
     if (image) {
       includes.push(Image);
     }
-    if (breed_id) {
+    if (breed) {
       includes.push(Breed);
     }
 
@@ -38,7 +40,7 @@ class PetController {
       {
         name,
         image,
-        breedId: breed_id,
+        breed,
         userId: user_id,
       },
       { include: includes }
@@ -98,11 +100,13 @@ class PetController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().notRequired(),
+      name: Yup.string().required(),
       image: Yup.object().shape({
         data: Yup.string().notRequired(),
       }),
-      breedId: Yup.number().notRequired(),
+      breed: Yup.object().shape({
+        data: Yup.string().notRequired(),
+      }),
       user: Yup.object().shape({
         data: Yup.string().notRequired(),
       }),
@@ -120,11 +124,13 @@ class PetController {
       return res.status(404).json({ message: 'Pet não encontrado' });
     }
 
-    const { name, breed_id } = req.body;
+    const { name } = req.body;
 
     pet = await pet.update({
       name,
-      breedId: breed_id,
+      breed,
+      image,
+      user,
     });
 
     pet = await Pet.findByPk(pet.id);
