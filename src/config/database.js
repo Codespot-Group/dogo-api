@@ -6,13 +6,10 @@ module.exports = {
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
+  port: 3306,
   logging: false,
   dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
+    ssl: false,
   },
   define: {
     timestamps: true,

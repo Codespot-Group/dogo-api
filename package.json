@@ -1,7 +1,7 @@
 {
-  "name": "o-mundo-em-bh-api",
+  "name": "api-pet",
   "version": "1.0.0",
-  "description": "A Rest API",
+  "description": "A Rest API to support Pet App",
   "main": "src/server.js",
   "scripts": {
     "start": "node dist/server.js",
